@@ -14,6 +14,7 @@ export class CurrencyInWords implements ComponentFramework.StandardControl<IInpu
     private ones: string[] = ["", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine ", "Ten ", "Eleven ", "Twelve ", "Thirteen ", "Fourteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen "];
     private tens: string[] = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
 
+    //Code Starts
 
     /**
      * Empty constructor.
@@ -51,7 +52,7 @@ export class CurrencyInWords implements ComponentFramework.StandardControl<IInpu
         this.CurrencyLookup = context.parameters.CurrencyLookup.raw[0];
         const CurrencyLocalCodeConverter = new CurrencyToLocaleConverter();
         this.GetCurrencnyLocaleCode(CurrencyLocalCodeConverter);
-        console.log("Calling Label with Amount " + this.amount + " and Currency " + this.currencyLocaleCode);
+        //console.log("Calling Label with Amount " + this.amount + " and Currency " + this.currencyLocaleCode);
         this._labelElement.innerHTML = this.numberToWords1(this.amount!, this.currencyLocaleCode).toUpperCase();
 
     }
@@ -61,10 +62,10 @@ export class CurrencyInWords implements ComponentFramework.StandardControl<IInpu
             Xrm.WebApi.retrieveRecord("transactioncurrency", this.CurrencyLookup.id, "?$select=isocurrencycode")
                 .then(
                     (result) => {
-                        console.log(result);
+                        //console.log(result);
                         const isocurrencycode: string = result.isocurrencycode; // Text
                         this.currencyLocaleCode = CurrencyLocalCodeConverter.getLocaleByCurrency(isocurrencycode);
-                        console.log("Current Record : " + this.currencyLocaleCode);
+                        //console.log("Current Record : " + this.currencyLocaleCode);
                         return;
                     }
                 )
@@ -103,9 +104,9 @@ export class CurrencyInWords implements ComponentFramework.StandardControl<IInpu
                 doNotAddOnly: false
             },
         });
-        console.log("Converting for " + this.currencyLocaleCode);
+        //console.log("Converting for " + this.currencyLocaleCode);
         const words = toWords.convert(num);
-        console.log("Converted " + words);
+       //console.log("Converted " + words);
         return words.trim(); // Removes any extra spaces at the end
 
     }
